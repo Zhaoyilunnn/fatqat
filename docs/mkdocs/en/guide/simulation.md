@@ -29,6 +29,13 @@ the next example.
 [Performance and scaling](performance.md) explains when to compare it with
 the Numba runtime.
 
+If you use several simulator implementations, select one by name with
+`fq.simulator.get("matrix", method="statevector", runtime="numpy")`.
+`fq.simulator.available()` lists names declared by installed plugins alongside
+`matrix`. Each selection creates a new backend, whose `run(program).result()`
+workflow is the same. A listed plugin may still need a working native runtime;
+see [Simulator plugins](../api/simulator-plugins.md) for discovery and errors.
+
 ## Choose a simulation method
 
 Set `method` to choose how the simulator represents the state:

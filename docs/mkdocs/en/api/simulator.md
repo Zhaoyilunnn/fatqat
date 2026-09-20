@@ -10,6 +10,10 @@ noise channels. It supports qubits, qudits, mixed register dimensions, and
 custom implementation maps. It runs the program as written; it does not
 transpile or route it.
 
+To select this backend by name, use `fatqat.simulator.get("matrix", **options)`.
+See [Simulator plugins](simulator-plugins.md) for installed third-party backends
+and the shared execution protocol.
+
 ## Quick start
 
 

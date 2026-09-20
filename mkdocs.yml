@@ -179,6 +179,7 @@ nav:
           - Simulators:
               - api/simulators/index.md
               - General simulator: api/simulator.md
+              - Simulator plugins: api/simulator-plugins.md
               - Superconducting profile: api/simulators/sc-qubit.md
               - Atom-array profile: api/simulators/atom-array.md
           - Emulators:
