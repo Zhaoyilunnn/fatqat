@@ -121,6 +121,37 @@ binding and execution contracts are specified here and in [Simulator](simulator.
 [`measure_all`][fatqat.Program.measure_all] update the current program and return
 `None`.
 
+## Read instructions
+
+Use `program.instructions` when writing a backend or program reader. It returns
+every instruction in insertion order as a tuple of
+[`OperationInstruction`][fatqat.program.OperationInstruction] and
+[`Measurement`][fatqat.operations.Measurement] records, including operations
+unknown to the reader. A later `add()` or `measure()` does not change an earlier
+snapshot.
+
+```python
+from fatqat.program import OperationInstruction
+
+for instruction in program.instructions:
+    if isinstance(instruction, OperationInstruction):
+        print(instruction.operation.name, instruction.targets, instruction.condition)
+    else:
+        print(instruction.targets, instruction.outputs)
+```
+
+Record fields cannot be reassigned. Operations, registers, and their references
+are shared by identity, not deeply copied or recursively frozen. Do not modify
+the program or its operations during a synchronous run. Targets retain the
+references and grouped views stored by `add()`; conditions retain their ordered
+classical reference/value pairs with logical AND semantics. Measurement pairs
+retain their order, including repeated outputs whose final write wins.
+
+These are reading records. Continue to build programs with `add()` and
+`measure()` rather than constructing instruction records.
+
+::: fatqat.program.OperationInstruction
+
 ## Draw
 
 
