@@ -30,6 +30,13 @@ be stored on the returned [`Job`][fatqat.Job] and raised by
       show_bases: false
       merge_init_into_class: false
 
+::: fatqat.errors.SimulatorPluginError
+    options:
+      members: false
+      inherited_members: false
+      show_bases: false
+      merge_init_into_class: false
+
 ::: fatqat.errors.BackendExecutionError
     options:
       members: false
