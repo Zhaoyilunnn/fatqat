@@ -21,7 +21,8 @@ result = backend.run(program, shots=10).result()
 targets. It does not check runtime availability. Names must match
 `[a-z][a-z0-9_-]*`; invalid installed names are omitted. `get()` rejects invalid
 input rather than stripping whitespace or changing case. A conflicting name
-appears once in the listing, but selecting it raises `SimulatorPluginError`
+appears once in the listing, but selecting it raises
+[`SimulatorPluginError`][fatqat.errors.SimulatorPluginError]
 with all provider distributions and entry-point targets. This also applies to
 plugins claiming the reserved `matrix` name.
 
@@ -89,5 +90,3 @@ plugin packages remain responsible for their runtime dependencies.
 ::: fatqat.simulator.get
 
 ::: fatqat.simulator.SimulatorBackend
-
-::: fatqat.errors.SimulatorPluginError
