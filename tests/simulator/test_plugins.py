@@ -89,6 +89,17 @@ def test_selected_factory_receives_options_and_unrelated_broken_plugin_is_not_lo
     broken.load.assert_not_called()
 
 
+def test_factory_can_receive_name_option(declarations):
+    factory = Mock(side_effect=lambda **kwargs: SimpleNamespace(run=lambda: None))
+    declarations.append(entry("custom", factory))
+
+    # The positional-only selector deliberately leaves this keyword for options.
+    # pylint: disable-next=kwarg-superseded-by-positional-arg
+    fq.simulator.get("custom", name="device-1")
+
+    factory.assert_called_once_with(name="device-1")
+
+
 @pytest.mark.parametrize("name", [None, 42, [], True])
 def test_non_string_name(name, declarations):
     with pytest.raises(TypeError, match="string"):

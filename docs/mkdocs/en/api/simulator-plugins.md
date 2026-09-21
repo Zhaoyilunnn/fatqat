@@ -25,7 +25,9 @@ appears once in the listing, but selecting it raises `SimulatorPluginError`
 with all provider distributions and entry-point targets. This also applies to
 plugins claiming the reserved `matrix` name.
 
-Each call invokes the factory with the supplied keyword arguments unchanged.
+Pass the simulator name as the first positional argument. Each call invokes the
+factory with the supplied keyword options unchanged, including an option named
+`name`.
 Instances and discovery results are not cached. Install plugins into the
 current Python environment and restart Python after installation or removal.
 

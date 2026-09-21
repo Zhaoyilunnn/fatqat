@@ -44,7 +44,7 @@ def _provider(entry: metadata.EntryPoint) -> str:
     return f"{name}: {entry.value}"
 
 
-def get(name: str, **options: Any) -> SimulatorBackend:
+def get(name: str, /, **options: Any) -> SimulatorBackend:
     """Create a simulator by its exact installed name.
 
     ``matrix`` selects `Simulator`; other factories come from the entry-point
@@ -55,8 +55,9 @@ def get(name: str, **options: Any) -> SimulatorBackend:
     signature and execution behavior remain the plugin author's responsibility.
 
     Args:
-        name: Lowercase ASCII name matching ``[a-z][a-z0-9_-]*``. No case or
-            whitespace normalization is performed.
+        name: Positional-only lowercase ASCII name matching
+            ``[a-z][a-z0-9_-]*``. No case or whitespace normalization is
+            performed.
         **options: Keyword arguments passed unchanged to the factory. For
             ``matrix``, these are the `Simulator` constructor options.
 
