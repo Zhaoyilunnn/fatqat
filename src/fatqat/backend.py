@@ -2,6 +2,7 @@
 
 from typing import Any, Protocol
 
+from .job import Job
 from .program import Program
 from .result import Result
 
@@ -13,13 +14,13 @@ class Backend(Protocol):
     and documents its supported options and the result fields it produces.
     """
 
-    def run(self, program: Program, /, **options: Any) -> Result:
-        """Execute one program and return its result.
+    def run(self, program: Program, /, **options: Any) -> Job[Result]:
+        """Submit one program and return its job.
 
         Args:
             program: Program to execute.
             **options: Backend-specific execution options.
 
         Returns:
-            The result produced by the backend.
+            A job containing the result produced by the backend.
         """
