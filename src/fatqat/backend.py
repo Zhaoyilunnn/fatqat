@@ -1,6 +1,6 @@
 """Structural interface for custom execution backends."""
 
-from typing import Any, Protocol
+from typing import Protocol
 
 from .job import Job
 from .program import Program
