@@ -11,13 +11,8 @@ from __future__ import annotations
 from .fake_atom_array import AtomArraySimulator
 from .fake_superconducting import SCQubitSimulator
 from .simulator import Simulator
-from ._plugins import available, get
-from ._protocol import SimulatorBackend
 
 __all__ = [
-    "available",
-    "get",
-    "SimulatorBackend",
     "Simulator",
     "AtomArraySimulator",
     "SCQubitSimulator",

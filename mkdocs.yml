@@ -179,7 +179,6 @@ nav:
           - Simulators:
               - api/simulators/index.md
               - General simulator: api/simulator.md
-              - Simulator plugins: api/simulator-plugins.md
               - Superconducting profile: api/simulators/sc-qubit.md
               - Atom-array profile: api/simulators/atom-array.md
           - Emulators:
@@ -199,6 +198,7 @@ nav:
               - Loss: api/noise/loss.md
               - Readout confusion: api/noise/readout-confusion.md
               - Custom implementations: api/noise/custom-implementations.md
+          - Backend: api/backend.md
           - Estimator: api/estimator.md
           - Job: api/job.md
           - Result: api/result.md

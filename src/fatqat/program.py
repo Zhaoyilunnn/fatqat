@@ -21,7 +21,7 @@ from .registers import (
     _view_members,
 )
 
-__all__ = ["Program", "OperationInstruction"]
+__all__ = ["Program"]
 
 ConditionTerm = tuple[RegisterRef, int]
 Condition = tuple[ConditionTerm, ...] | None
@@ -36,27 +36,6 @@ RegisterT = TypeVar("RegisterT", QuantumRegister, ClassicalRegister)
 # `RegisterView` selecting multiple members of one `QuantumRegister`.
 # See `_AppliedOperation.targets` and `Program.add`.
 QuantumTarget = RegisterRef | RegisterView
-
-
-@dataclass(frozen=True)
-class OperationInstruction:
-    """Read one operation from a `Program.instructions` snapshot.
-
-    Create programs with `Program.add`, not by constructing these records.
-    Fields cannot be reassigned; referenced objects retain their identities
-    and are not recursively frozen or copied.
-
-    Args:
-        operation: The original operation, including custom operations.
-        targets: Quantum references or views in operand order. Views retain
-            the expression stored by `Program.add`.
-        condition: Classical reference/value pairs combined with logical AND,
-            or ``None`` for an unconditional operation.
-    """
-
-    operation: Operation
-    targets: tuple[RegisterRef | RegisterView, ...]
-    condition: tuple[tuple[RegisterRef, int], ...] | None = None
 
 
 @dataclass(frozen=True)
@@ -205,30 +184,6 @@ class Program:
         # must fail the dict copy below, exactly as Register.__post_init__
         # does, instead of silently becoming {}.
         self.metadata: dict[str, Any] = dict(metadata) if metadata is not None else {}
-
-    @property
-    def instructions(self) -> tuple[OperationInstruction | Measurement, ...]:
-        """Return all instructions in insertion order as a read-only snapshot.
-
-        Later additions do not change a previously returned tuple. Operation
-        records have immutable fields; operations, registers, and references
-        are shared by identity, without recursive freezing or copying. Do not
-        mutate the program or its operations during a synchronous backend run.
-
-        Measurements use `fatqat.operations.Measurement`. Their target/output
-        pairs are processed in order, with the last write to an output winning.
-        Unknown operations are retained for the reader to handle or reject.
-        """
-        return tuple(
-            (
-                instruction
-                if isinstance(instruction, Measurement)
-                else OperationInstruction(
-                    instruction.operation, instruction.targets, instruction.condition
-                )
-            )
-            for instruction in self._instructions
-        )
 
     @property
     def _instructions(self) -> tuple[_AppliedOperation | Measurement, ...]:

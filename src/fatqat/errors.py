@@ -11,10 +11,6 @@ class BackendValidationError(FatqatError):
     """A backend cannot run the supplied program or request."""
 
 
-class SimulatorPluginError(FatqatError):
-    """Simulator discovery, plugin loading, or factory structure is invalid."""
-
-
 class BackendExecutionError(FatqatError):
     """A backend failed after accepting an execution request.
 
