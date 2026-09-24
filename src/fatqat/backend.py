@@ -19,7 +19,6 @@ class Backend(Protocol):
 
         Args:
             program: Program to execute.
-            **options: Backend-specific execution options.
 
         Returns:
             A job containing the result produced by the backend.
