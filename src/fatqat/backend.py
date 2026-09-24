@@ -14,7 +14,7 @@ class Backend(Protocol):
     and documents its supported options and the result fields it produces.
     """
 
-    def run(self, program: Program, /, **options: Any) -> Job[Result]:
+    def run(self, program: Program, /) -> Job[Result]:
         """Submit one program and return its job.
 
         Args:
